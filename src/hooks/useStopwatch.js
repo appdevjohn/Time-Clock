@@ -1,35 +1,44 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
 
-export const useStopwatch = startDate => {
-    let initialSeconds = 0;
-    if (startDate) {
-        const now = new Date();
-        initialSeconds = Math.floor((now - startDate) / 1000);
-    }
-    const [seconds, setSeconds] = useState(initialSeconds);
+const getSecondDifference = (start, end) => {
+    return Math.floor((end - start) / 1000);
+}
+
+export const useStopwatch = start => {
+    const [startDate, setStartDate] = useState(start ? start.getTime() : Date.now());
+    const [seconds, setSeconds] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
 
     const startStopwatch = useCallback(() => {
+        if (!startDate) {
+            setStartDate(Date.now());
+        }
+
+        let initialSeconds = getSecondDifference(startDate, Date.now());
+
+        setSeconds(initialSeconds);
         setIsRunning(true);
-    }, [setIsRunning]);
+    }, [setIsRunning, startDate]);
 
     const resetStopwatch = useCallback(() => {
+        setStartDate(null);
         setSeconds(0);
         setIsRunning(false);
-    }, [setSeconds, setIsRunning]);
+    }, [setStartDate, setSeconds, setIsRunning]);
 
     useEffect(() => {
         let timer;
         if (isRunning) {
             timer = setTimeout(() => {
-                setSeconds(s => s + 1);
+                console.log(getSecondDifference(startDate, Date.now()));
+                setSeconds(getSecondDifference(startDate, Date.now()));
             }, 1000);
         }
 
         return () => {
             clearTimeout(timer);
         };
-    }, [seconds, isRunning]);
+    }, [isRunning, startDate, seconds]);
 
     let secondsLeft = seconds;
     const outputHours = Math.floor(secondsLeft / 3600);
