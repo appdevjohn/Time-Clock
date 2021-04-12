@@ -1,0 +1,28 @@
+.LogIn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+.form {
+    display: block;
+    text-align: center;
+}
+
+.input {
+    appearance: none;
+    border: none;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 70%;
+    max-width: 25rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: 1px 1px 4px #999999;
+}
+
+.link {
+    text-decoration: none;
+}

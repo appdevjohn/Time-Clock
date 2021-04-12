@@ -1,0 +1,32 @@
+.status {
+    margin: 3rem;
+    min-height: 4.25rem;
+}
+
+.statusTitle {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.clockInTime {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.clockInDuration {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 2rem 0;
+}
+
+.buttonRow {
+    text-align: center;
+    margin: 2rem;
+}
+
+.previousWork {
+    margin: 0 1rem;
+}

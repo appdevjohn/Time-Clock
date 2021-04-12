@@ -1,0 +1,15 @@
+.Table {
+    width: 100%;
+}
+
+.title {
+    text-align: left;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}

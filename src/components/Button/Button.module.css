@@ -1,0 +1,16 @@
+.Button {
+    font-size: 1rem;
+    background-color: rgb(42, 42, 85);
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    appearance: none;
+    border: none;
+    margin: 1rem auto;
+}
+
+.big {
+    font-size: 1.5rem;
+    padding: 8px;
+    margin: auto;
+}
