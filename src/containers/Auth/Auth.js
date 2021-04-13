@@ -8,7 +8,7 @@ import classes from './Auth.module.css';
 
 const Auth = props => {
     if (props.authenticated) {
-        return <Redirect path="/" />
+        return <Redirect to="/" />
     }
     
     return (
