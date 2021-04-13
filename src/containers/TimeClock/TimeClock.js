@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import api from '../../api';
 
@@ -65,6 +66,10 @@ const TimeClock = props => {
         setStopWatchActive(clockInTime !== null);
     }, [clockInTime, apiClockIn]);
 
+
+    if (token == null) {
+        return <Redirect to="/auth" />
+    }
 
     if (props.contentLoading) {
         return (

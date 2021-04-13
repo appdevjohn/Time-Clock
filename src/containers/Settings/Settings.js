@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from '../../components/Header/Header';
@@ -6,6 +7,9 @@ import Button from '../../components/Button/Button';
 import classes from './Settings.module.css';
 
 const Settings = props => {
+    if (!props.authenticated) {
+        return <Redirect to="/login" />
+    }
 
     return (
         <div className={classes.Settings}>
@@ -17,6 +21,12 @@ const Settings = props => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        authenticated: state.auth.token !== null
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         logout: () => dispatch({
@@ -25,4 +35,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

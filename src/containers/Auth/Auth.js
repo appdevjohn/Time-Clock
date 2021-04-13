@@ -10,11 +10,12 @@ const Auth = props => {
     if (props.authenticated) {
         return <Redirect path="/" />
     }
-
+    
     return (
         <div className={classes.Auth}>
             <Switch>
                 <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={LogIn} />
                 <Route path="/" component={LogIn} />
             </Switch>
         </div>

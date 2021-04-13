@@ -60,13 +60,9 @@ const App = props => {
         }
     }, [getInitialData, authenticated, authenticate, setContentLoading]);
 
-    if (!props.authenticated) {
-        return <Auth />
-    }
-
     return (
         <Switch>
-            <Route path={['/login', '/signup']} component={Auth} />
+            <Route path={['/login', '/signup', '/auth']} component={Auth} />
             <Route path="/settings" component={Settings} />
             <Route path="/" component={TimeClock} />
         </Switch>
