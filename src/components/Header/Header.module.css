@@ -3,8 +3,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
-    box-shadow: 1px 0px 6px #999999;
+    background-color: var(--header-background);
+    box-shadow: 1px 0px 6px var(--shadow);
     padding: 0 1rem;
     position: fixed;
     top: 0;

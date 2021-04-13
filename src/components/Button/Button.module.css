@@ -1,6 +1,6 @@
 .Button {
     font-size: 1rem;
-    background-color: rgb(42, 42, 85);
+    background-color: var(--standard-purple);
     color: white;
     border-radius: 6px;
     padding: 6px 12px;

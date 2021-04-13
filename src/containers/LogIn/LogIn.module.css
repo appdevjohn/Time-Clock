@@ -20,9 +20,17 @@
     max-width: 25rem;
     border-radius: 8px;
     font-size: 1rem;
-    box-shadow: 1px 1px 4px #999999;
+    background-color: white;
+    color: black;
+    box-shadow: 1px 1px 4px var(--shadow);
 }
 
 .link {
     text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .link {
+        color: white;
+    }
 }
