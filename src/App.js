@@ -8,7 +8,7 @@ import TimeClock from './containers/TimeClock/TimeClock';
 import Settings from './containers/Settings/Settings';
 
 const App = props => {
-    const { onReset, userId, authenticated, authenticate, setContentLoading, setError } = props;
+    const { onReset, userId, token, authenticated, authenticate, setContentLoading, setError } = props;
 
     const getInitialData = useCallback(() => {
         setContentLoading(true);
@@ -27,15 +27,26 @@ const App = props => {
             }
             `
         }
-        api.post('/graphql', query).then(response => {
-            const userData = response.data.data.user;
-            const records = response.data.data.records;
-            onReset(userData, records);
+        api.post('/graphql', query, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
+            if (response.data.errors?.length > 0) {
+                setError(response.data.errors[0].message);
+            } else {
+                const userData = response.data.data.user;
+                const records = response.data.data.records;
+                onReset(userData, records);
+            }
             setContentLoading(false);
         }).catch(error => {
+            console.log(error);
+            setContentLoading(false);
             setError(error);
         });
-    }, [userId, onReset, setError, setContentLoading]);
+    }, [userId, token, onReset, setError, setContentLoading]);
 
     useEffect(() => {
         if (authenticated) {
@@ -65,7 +76,8 @@ const App = props => {
 const mapStateToProps = state => {
     return {
         authenticated: state.auth.token !== null,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        token: state.auth.token
     };
 }
 

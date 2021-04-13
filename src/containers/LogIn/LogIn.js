@@ -26,7 +26,12 @@ const LogIn = props => {
             }
             `
         }
-        api.post('/graphql', query).then(response => {
+        api.post('/graphql', query, {
+            headers: {
+                Authorization: 'Bearer ' + props.token,
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
             setLoggingIn(false);
             const login = response.data.data.login;
             if (login) {

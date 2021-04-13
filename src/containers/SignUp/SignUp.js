@@ -27,7 +27,12 @@ const SignUp = props => {
                 }
                 `
             }
-            api.post('/graphql', query).then(response => {
+            api.post('/graphql', query, {
+                headers: {
+                    Authorization: 'Bearer ' + props.token,
+                    'Content-Type': 'application/json'
+                },
+            }).then(response => {
                 const signUp = response.data.data.signUp;
                 if (signUp) {
                     const userId = signUp.userId;
@@ -78,6 +83,12 @@ const SignUp = props => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         authenticate: (userId, token) => dispatch({
@@ -91,4 +102,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

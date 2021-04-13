@@ -10,7 +10,7 @@ import Button from '../../components/Button/Button';
 import classes from './TimeClock.module.css';
 
 const TimeClock = props => {
-    const { clockInTime, userId } = props;
+    const { clockInTime, userId, token } = props;
     const [stopwatchActive, setStopWatchActive] = useState(clockInTime !== null);
 
     const apiClockIn = useCallback(() => {
@@ -23,10 +23,15 @@ const TimeClock = props => {
             }
             `
         }
-        api.post('/graphql', query).then(response => {
+        api.post('/graphql', query, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
             console.log(response);
         }).catch(error => console.error(error));
-    }, [userId, clockInTime]);
+    }, [userId, clockInTime, token]);
 
     const apiClockOut = () => {
         const query = {
@@ -43,7 +48,12 @@ const TimeClock = props => {
             }
             `
         }
-        api.post('/graphql', query).then(response => {
+        api.post('/graphql', query, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
             console.log(response);
         }).catch(error => console.error(error));
     }
