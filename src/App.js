@@ -18,11 +18,10 @@ const App = props => {
                 user(userId: "${userId}") {
                     name
                     timeIn
-                }
-                records(userId: "${userId}") {
-                    timeIn
-                    timeOut
-                    id
+                    records {
+                        timeIn
+                        timeOut
+                    }
                 }
             }
             `
@@ -37,12 +36,10 @@ const App = props => {
                 setError(response.data.errors[0].message);
             } else {
                 const userData = response.data.data.user;
-                const records = response.data.data.records;
-                onReset(userData, records);
+                onReset(userData, userData.records);
             }
             setContentLoading(false);
         }).catch(error => {
-            console.log(error);
             setContentLoading(false);
             setError(error);
         });
