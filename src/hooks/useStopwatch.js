@@ -30,7 +30,6 @@ export const useStopwatch = start => {
         let timer;
         if (isRunning) {
             timer = setTimeout(() => {
-                console.log(getSecondDifference(startDate, Date.now()));
                 setSeconds(getSecondDifference(startDate, Date.now()));
             }, 1000);
         }
