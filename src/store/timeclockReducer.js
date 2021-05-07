@@ -18,7 +18,7 @@ const resetState = (state, action) => {
 
     const date = new Date();
     const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    const firstOfWeek = new Date(date.getDate() - date.getDay());
+    const firstOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
     let thisMonthHours = 0;
     let thisWeekHours = 0;
     records.forEach(r => {
