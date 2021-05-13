@@ -1,4 +1,5 @@
 .Button {
+    cursor: pointer;
     font-size: 1rem;
     background-color: var(--standard-purple);
     color: white;
