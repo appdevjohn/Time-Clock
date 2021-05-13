@@ -19,15 +19,16 @@ const resetState = (state, action) => {
     const date = new Date();
     const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const firstOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
-    let thisMonthHours = 0;
-    let thisWeekHours = 0;
+    let monthHours = 0;
+    let weekHours = 0;
     records.forEach(r => {
         const difference = (r.timeOut.getTime() - r.timeIn.getTime()) / (60 * 60 * 1000);
-        if (r.timeIn >= firstOfWeek) {
-            thisWeekHours += difference;
+        const hours = difference;
+        if (r.timeIn.getTime() > firstOfMonth.getTime()) {
+            monthHours += hours;
         }
-        if (r.timeIn >= firstOfMonth) {
-            thisMonthHours += difference;
+        if (r.timeIn.getTime() > firstOfWeek.getTime()) {
+            weekHours += hours;
         }
     });
 
@@ -36,8 +37,8 @@ const resetState = (state, action) => {
         status: action.timeIn ? 'Clocked In' : 'Clocked Out',
         clockInTime: action.timeIn ? new Date(action.timeIn) : null,
         records: records,
-        totalMonthHours: thisMonthHours,
-        totalWeekHours: thisWeekHours
+        totalMonthHours: monthHours,
+        totalWeekHours: weekHours
     }
 }
 
@@ -67,24 +68,25 @@ const addRecord = (state, action) => {
 
     const date = new Date();
     const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    const firstOfWeek = new Date(date.getDate() - date.getDay());
-    let thisMonthHours = 0;
-    let thisWeekHours = 0;
+    const firstOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
+    let monthHours = 0;
+    let weekHours = 0;
     newRecords.forEach(r => {
         const difference = (r.timeOut.getTime() - r.timeIn.getTime()) / (60 * 60 * 1000);
-        if (r.timeIn >= firstOfWeek) {
-            thisWeekHours += difference;
+        const hours = difference;
+        if (r.timeIn.getTime() > firstOfMonth.getTime()) {
+            monthHours += hours;
         }
-        if (r.timeIn >= firstOfMonth) {
-            thisMonthHours += difference;
+        if (r.timeIn.getTime() > firstOfWeek.getTime()) {
+            weekHours += hours;
         }
     });
 
     return {
         ...state,
         records: newRecords,
-        totalMonthHours: thisMonthHours,
-        totalWeekHours: thisWeekHours
+        totalMonthHours: monthHours,
+        totalWeekHours: weekHours
     }
 }
 
