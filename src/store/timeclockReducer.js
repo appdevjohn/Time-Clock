@@ -64,7 +64,7 @@ const addRecord = (state, action) => {
         timeOut: action.timeOut
     }
     const newRecords = state.records.map(r => ({ ...r }));
-    newRecords.push(record);
+    newRecords.unshift(record);
 
     const date = new Date();
     const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
